@@ -22,12 +22,13 @@ public class UserController {
 	@Autowired
 	private UserService service;
 	
+	@RequestMapping("/users/all")
 	@GetMapping
 	public ResponseEntity<List<UserDTO>> findAll() {
 		List<UserDTO> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
-	
+		
 	@RequestMapping("/users")
 	public ResponseEntity<UserDTO> insert (@RequestBody UserDTO dto){
 		dto = service.insert(dto);

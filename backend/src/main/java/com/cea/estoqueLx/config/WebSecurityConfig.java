@@ -14,10 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 
 @Configuration
@@ -51,70 +48,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return super.authenticationManagerBean();
 	}
 
-	/*
-	 * @Override public void configure(WebSecurity web) throws Exception {
-	 * 
-	 * web.ignoring().antMatchers("/authenticate", "/swagger-resources/**",
-	 * "/swagger-ui.html" );
-	 * 
-	 * 
-	 * }
-	 */
-	
-	/*@Bean
-	public WebSecurityConfigurerAdapter webSecurity() {
-	    return new WebSecurityConfigurerAdapter() {
-
-	        @Override
-	        protected void configure(HttpSecurity http) throws Exception {
-	            http.headers().addHeaderWriter(
-	                    new StaticHeadersWriter("Access-Control-Allow-Origin", "*"));
-
-
-	        }
-	    };
-	}*/
-	
-	/*@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/api/**");
-			}
-		};
-	}*/
-	
-	@SuppressWarnings("deprecation")
-	@Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurerAdapter() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:3000").allowedMethods("PUT", "DELETE",
-                        "GET", "POST");
-            }
-        };
-    }
-	
-	/*public void addCorsMappings(CorsRegistry registry) {
-	  registry.addMapping("/info/**")
-	   	  .allowedOrigins("http://localhost:3000", "http://localhost:8083")
-		  .allowedMethods("POST", "GET",  "PUT", "OPTIONS", "DELETE",  "HEAD", "TRACE", "CONNECT")
-		  .allowedHeaders("X-Auth-Token", "Content-Type")
-		  .exposedHeaders("custom-header1", "custom-header2")
-		  .allowCredentials(false)
-		  .maxAge(4800);
-	}*/
 	
 	protected void configure(HttpSecurity http) throws Exception {
 				
 				http
 				.csrf().disable()
+				
 				// Não cheque essas requisições
-				.authorizeRequests().antMatchers("/authenticate", "/v2/api-docs", "/configuration/ui",
-						"/swagger-resources/**", "/configuration/**", "/swagger-ui.html", "/webjars/**", "/users")
+				.authorizeRequests().antMatchers("/authenticate", "/users" )
 				.permitAll().
+				
 				// Qualquer outra requisição deve ser checada
 				 anyRequest().authenticated().and().exceptionHandling()
 				.authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
@@ -124,5 +67,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 				http.cors();
 	}
+	
 
 }

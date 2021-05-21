@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cea.estoqueLx.dto.ProductDTO;
 import com.cea.estoqueLx.model.Product;
 import com.cea.estoqueLx.repositories.ProductRepository;
 
@@ -18,9 +19,9 @@ public class ProductService {
 	private ProductRepository productRepository;
 
 	@Transactional(readOnly = true)
-	public List<Product> findAll() {
+	public List<ProductDTO> findAll() {
 		List<Product> list = productRepository.findAll();
-		return list.stream().map(x -> new Product(x)).collect(Collectors.toList());
+		return list.stream().map(x -> new ProductDTO(x)).collect(Collectors.toList());
 	}
 
 	

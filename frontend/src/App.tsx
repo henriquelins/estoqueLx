@@ -6,7 +6,7 @@ function App() {
     <div>
       <>
         <Routes />
-        <Footer />
+        <Footer/>
       </>
     </div>
   );
