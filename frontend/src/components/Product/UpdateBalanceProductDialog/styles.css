@@ -1,0 +1,162 @@
+.product-container {
+  padding: 20px 0px 0px 9px;
+  height: calc(100vh - 254px);
+}
+
+.product-content {
+  flex-direction: column;
+  align-items: inherit;
+  padding: 30px 30px 60px 30px;
+  position: center;
+  width: 95%;
+  height: 100%;
+} 
+
+.orders-list-container {
+    display: flex;
+    justify-content: center;
+    padding: 10px 30px 80px 0px;
+  }
+  
+.orders-list-items {
+    width: 70%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 235px);
+    grid-gap: 80px 15px;
+    justify-content: space-between;
+}
+  
+.order-card-container {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    padding: 15px;
+    cursor: pointer;
+}
+  
+.order-card-container.selected {
+  border: 4px solid #008E5B;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+  
+.order-card-container:hover {
+  transform: scale(1.01);
+}
+  
+.order-card-title {
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 25px;
+  letter-spacing: -0.015em;
+  color: rgb(36, 18, 134);
+  text-align: center;
+}
+  
+.order-card-container.selected .order-card-title {
+  color: #008E5B;
+ }
+  
+.order-card-image {
+  padding-left: 20%;
+  width:80%;
+}
+  
+.order-card-container.selected .order-card-price {
+    color: #008E5B;
+}
+  
+.order-card-description {
+  border-top: 1px solid rgb(36, 18, 134);
+  margin-top: 15px;
+  padding-top: 15px;
+}
+  
+.order-card-description h3 {
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: -0.015em;
+    color: var(--secondary-color);
+}
+  
+.order-card-description p {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: -0.015em;
+    color: gray;
+}
+
+.updateBalance-button{
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  border: 0px;
+  cursor: pointer;
+  color: #fff;
+  text-align: center;
+  width: 100px;
+  padding: 5px 5px 5px 5px;
+  margin-top: 10px;
+  margin-left: 50px;
+  border-radius: 10px;
+  background-color: var(--dark-color);
+
+}
+
+.updateBalance-button:hover {
+  background-color: var(--primary-hover-color);
+  transform: scale(1.09);
+}
+
+/* Style inputs, select elements and textareas */
+input[type=text], select, textarea{
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+input[type=number], select, textarea{
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+
+}
+
+.addUpdateBalanceProductDialogModal-button-container{
+  display: flexbox;
+  padding: 20px 20px 20px 20px;
+  align-items: center;
+}
+
+.addUpdateBalanceProductDialogModal-button{
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 20px;
+  cursor: pointer;
+  color: #fff;
+  text-align: center;
+  width: 25%;
+  border: 1;
+  border-color: #FFF;
+  padding: 10px ;
+  margin-left: 38%;
+  border-radius: 15px;
+  background-color: var(--dark-color);
+
+}
+
+.addUpdateBalanceProductDialogModal-button:hover {
+  transform: scale(1.09);
+  background-color: var(--primary-hover-color);
+}

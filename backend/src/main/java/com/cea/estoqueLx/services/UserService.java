@@ -47,8 +47,37 @@ public class UserService {
 	
 
 	public UserDTO getByEmail(String email) {
-		User user = userRepository.findOne(email);
+		
+		try {
+			
+			User user = userRepository.findOne(email);
+			return new UserDTO(user);
+			
+		} catch (Exception e) {
+			
+			System.out.println("E-mail não encontrado. Erro: " + e);
+			return null;
+		}
+		
+		
+		
+	}
+	
+	@Transactional
+	public void delete(Long id) {
+		userRepository.deleteById(id);
+	}
+
+	@Transactional
+	public UserDTO loadUserByName( String username ) {
+		User user = userRepository.findByName(username);
 		return new UserDTO(user);
+	}
+	
+	@Transactional
+	public List<UserDTO> loadUserByNameList(String username) {
+		List<User> list = userRepository.findByNameList(username);
+		return list.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
 	}
 
 }

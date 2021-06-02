@@ -16,18 +16,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebMvc
 public class WebConfig implements Filter,WebMvcConfigurer {
 
-
-
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**");
+        registry.addMapping("/**")
+        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");//or whichever methods you want to allow
+       //.allowedOrigins("*") //or www.example.com if you want to be more specific
+       //.allowedHeaders("Content_Type", "Authorization"); //i also put Authorization since i saw you probably want to do so*/
     }
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) {
       HttpServletResponse response = (HttpServletResponse) res;
       HttpServletRequest request = (HttpServletRequest) req;
-      System.out.println("WebConfig; "+request.getRequestURI());
+      System.out.println("WebConfig; "+ request.getRequestURI());
       response.setHeader("Access-Control-Allow-Origin", "*");
       response.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");
       response.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With,observe");

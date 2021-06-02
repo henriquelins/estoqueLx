@@ -1,3 +1,4 @@
+import Footer from "components/Footer";
 import Header from "components/Header";
 import Login from "components/Login";
 import { Component } from "react";
@@ -9,6 +10,7 @@ class SignIn extends Component {
       <div>
         <Header />
         <Login />
+        <Footer />
       </div>
     );
   }

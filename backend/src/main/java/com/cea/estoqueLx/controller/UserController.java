@@ -29,7 +29,7 @@ public class UserController {
 		return ResponseEntity.ok().body(list);
 	}
 		
-	@RequestMapping("/users")
+	@RequestMapping("/users/add")
 	public ResponseEntity<UserDTO> insert (@RequestBody UserDTO dto){
 		dto = service.insert(dto);
 				

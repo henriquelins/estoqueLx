@@ -1,7 +1,0 @@
-spring.profiles.active=test
-
-spring.jpa.open-in-view=true
-
-jwt.secret=@estoque-Token
-
-jwt.get.token.uri=/authenticate

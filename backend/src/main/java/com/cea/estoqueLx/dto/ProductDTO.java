@@ -12,7 +12,7 @@ public class ProductDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Integer id;
+	private Long id;
 	private String name;
 	private Integer amount;
 	private String description;
@@ -22,7 +22,7 @@ public class ProductDTO implements Serializable {
 		
 	}
 	
-	public ProductDTO(Integer id, String name, Integer amount, String description, String imageUri, String imageuri) {
+	public ProductDTO(Long id, String name, Integer amount, String description, String imageUri, String imageuri) {
 		this.id = id;
 		this.name = name;
 		this.amount = amount;
@@ -38,11 +38,11 @@ public class ProductDTO implements Serializable {
 		imageuri = entity.getImageUri();
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -15,21 +15,26 @@ import com.cea.estoqueLx.dto.UserDTO;
 public class JwtUserDetailsService implements UserDetailsService {
 
 	@Autowired
-    private UserService userService;
-	
+	private UserService userService;
+
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		
 		UserDTO dto = userService.getByEmail(email);
 		
-		if (dto.getEmail().equals(email)) {
-			return new User(email, dto.getPassword(),
-					new ArrayList<>());
-		} else {
-			throw new UsernameNotFoundException("User not found with email: " + email);
-		}
-	}
-	
-	
-}
+		try {
+			
+			return new User(dto.getEmail(), dto.getPassword(), new ArrayList<>());
 
+		} catch (java.lang.NullPointerException e) {
+
+			System.out.println("Usuário não encontrado1! " + e);
+			dto.setEmail("");
+			dto.setPassword("");
+			
+			return new User(dto.getEmail(), dto.getPassword(), new ArrayList<>());
+		}
+		
+	}
+
+}
