@@ -1,7 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useDialog } from 'react-st-modal';
 import { toast } from 'react-toastify';
-//import { toast } from 'react-toastify';
 import { Product } from 'types/product';
 import { deleteProduct } from '../../../services/api';
 
@@ -16,26 +15,61 @@ type Inputs = {
 
 export function DeleteProductDialogModal({ product }: Props) {
 	
+	const refreshPage = () => {
+		window.location.reload();
+	};
+	
 	const dialog = useDialog();
 	
 	const { handleSubmit } = useForm<Inputs>({
 		defaultValues: {
-			id: product.id
+			id: Number(product.id)
 		}
 	});
 	
 	
-	const refreshPage = () => {
-		window.location.reload();
-	};
+	
 
 
 	const onSubmit = (data: Inputs) => {
-		JSON.stringify(data.id);
-		console.log(data.id)
-		deleteProduct(data.id)
+			
+		JSON.stringify(data);
+		
+		deleteProduct(data)
+			.then(() => {
+			
+				toast.success('Produto excluído com sucesso!', {
+					position: 'top-right',
+					onClose: (props) => refreshPage(),
+					autoClose: 1500,
+					hideProgressBar: true,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined
+				});
+				
+			})
+			.catch(() => {
+				
+				toast.error('Produto não excluído!', {
+					position: 'top-right',
+					autoClose: 1500,
+					hideProgressBar: true,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined
+				});
+				
+			})
+			.finally(() => {
+				dialog.close();
+			});
 		
 	};
+	
+	
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="form-signin  ">

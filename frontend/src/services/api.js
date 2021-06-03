@@ -29,8 +29,8 @@ export function fetchProducts(){
   return api.get("/products/all")
 }
 
-export function updateBalanceProduct(id, amount) {
-  return api.put("/products/updateAmount", {id, amount})
+export function updateBalanceProduct(data) {
+  return api.put("/products/updateAmount", data)
 }
 
 export function addProduct(data){
@@ -38,13 +38,11 @@ export function addProduct(data){
 }
 
 export function editProduct(data){
-  console.log(data.id)
   return api.put("/products/edit", data)     
 }
 
-export function deleteProduct(id){
-  console.log(id)
-  void api.delete("/products/delete", id)
+export function deleteProduct(data){
+  return api.delete("/products/delete", data)
 }
 
 

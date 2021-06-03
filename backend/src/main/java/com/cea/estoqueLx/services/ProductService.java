@@ -43,10 +43,8 @@ public class ProductService {
 
 	@Transactional
 	public ProductDTO update(ProductDTO dto) {
-
 		Product product = new Product(dto.getId(), dto.getName(), dto.getAmount(), dto.getDescription(),
 				dto.getImageUri());
-
 		product = productRepository.save(product);
 		return new ProductDTO(product);
 	}

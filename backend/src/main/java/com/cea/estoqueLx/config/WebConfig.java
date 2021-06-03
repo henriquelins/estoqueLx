@@ -19,9 +19,9 @@ public class WebConfig implements Filter,WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");//or whichever methods you want to allow
-       //.allowedOrigins("*") //or www.example.com if you want to be more specific
-       //.allowedHeaders("Content_Type", "Authorization"); //i also put Authorization since i saw you probably want to do so*/
+        .allowedOrigins("*")
+        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")//or whichever methods you want to allow
+        .allowedHeaders("Content_Type", "Authorization"); //i also put Authorization since i saw you probably want to do so*/
     }
 
     @Override

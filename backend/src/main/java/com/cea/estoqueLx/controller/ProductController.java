@@ -81,30 +81,56 @@ public class ProductController {
 		
 	}*/
 
-	@DeleteMapping("/products/delete/{id}") public void delete (@PathVariable Long id){
+	/*@DeleteMapping("/products/delete/{id}") 
+		public void delete(@PathVariable(value = "id") Long prodId) {	
+	
+			ProductDTO dto = service.findOne(prodId);
+			service.delete(dto.getId());
+			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+			
+	
+		
+	}*/
+	
+	@DeleteMapping("/products/delete/{id}")
+	public void delete (@PathVariable (value="id")Long id){
 		service.delete(id);
 	}
+
 	
 
-	@PutMapping("/products/edit")
-	public ResponseEntity<ProductDTO> put(@RequestBody ProductDTO dto) {
+	/*@PutMapping("/products/edit")
+	public ResponseEntity<ProductDTO> put (@RequestBody ProductDTO dto){
+		dto = service.update(dto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+		return ResponseEntity.created(uri).body(dto);
+		
+	}*/
+	
+	
+	/*@PutMapping("/products/edit/{id}")
+	public ResponseEntity<ProductDTO> put (@PathVariable (value="id") Long id, ProductDTO dto){
 		dto = service.update(dto);
 		return ResponseEntity.ok().body(dto);
+	}*/
+	
+	@PutMapping("/products/edit")
+	public ResponseEntity<ProductDTO> put (@RequestBody ProductDTO dto){
+		dto = service.update(dto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(dto.getId()).toUri();
+		return ResponseEntity.created(uri).body(dto);
 	}
 	
-	@PutMapping("/products/updateAmount/{id}{amount}")
-	public ResponseEntity<ProductDTO> put(@PathVariable Long id, Integer amount) {
-		
-		ProductDTO dto = service.findOne(id);
-		 
-		if (dto != null) {
-			
-			dto.setAmount(amount);
-			dto = service.update(dto);
-			
-		}
-		
-		return ResponseEntity.ok().body(dto);
+	@PutMapping("/products/updateAmount")
+	public ResponseEntity<ProductDTO> putAmout (@RequestBody ProductDTO dto){
+		Integer amount = dto.getAmount();
+		dto = service.findOne(dto.getId());
+		dto.setAmount(amount);
+		dto = service.update(dto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(dto.getId()).toUri();
+		return ResponseEntity.created(uri).body(dto);
 	}
 
 	@GetMapping(path = { "/products/findByNameList/{name}" })

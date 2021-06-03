@@ -79,18 +79,7 @@ export function EditProductDialogModal({ product }: Props) {
 				<input className="form-control" type="text" {...register('name')} placeholder="Nome..." required />
 			</div>
 
-			<div className="mb-3">
-				<label htmlFor="amount" className="form-label">
-					Quantidade do produto
-				</label>
-				<input
-					className="form-control"
-					type="number"
-					{...register('amount')}
-					placeholder="Quantidade..."
-					required
-				/>
-			</div>
+			
 
 			<div className="mb-3">
 				<label htmlFor="description" className="form-label">

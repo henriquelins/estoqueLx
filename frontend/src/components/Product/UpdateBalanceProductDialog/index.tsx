@@ -3,6 +3,7 @@ import { useDialog } from 'react-st-modal';
 import { updateBalanceProduct } from '../../../services/api.js';
 import '../UpdateBalanceProductDialog/styles.css';
 import { Product } from '../../../types/product.js';
+import { toast } from 'react-toastify';
 
 type Props = {
 	product: Product;
@@ -10,8 +11,9 @@ type Props = {
 
 type Inputs = {
 	id: number;
-	transactionType: string;
 	amount: number;
+	transactionType: string;
+	
 };
 
 export function UpdateBalanceProductDialogModal({ product }: Props) {
@@ -21,10 +23,15 @@ export function UpdateBalanceProductDialogModal({ product }: Props) {
 
 	const dialog = useDialog();
 
-	const { register, handleSubmit } = useForm<Inputs>();
+	const { register, handleSubmit } = useForm<Inputs>({
+		
+		defaultValues: {
+			id: product.id,
+			amount: 0,
+			transactionType: ""
+		}
+	});
 	
-	
-
 	const onSubmit = (data: Inputs) => {
 		alert(JSON.stringify(data));
 		
@@ -34,15 +41,36 @@ export function UpdateBalanceProductDialogModal({ product }: Props) {
 			data.amount = Number(product.amount) - Number(data.amount);
 		}
 		
-		alert(data.amount);
 		
-		updateBalanceProduct( data.id , data.amount)
+		
+		updateBalanceProduct(data)
 			.then((response) => {
-				alert(data.amount);
+				
+				toast.success('Saldo atualizado sucesso!', {
+					position: 'top-right',
+					onClose: (props) => refreshPage(),
+					autoClose: 1500,
+					hideProgressBar: true,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined
+				});
+				
 				refreshPage();
 			})
 			.catch(() => {
-				alert('Erro ' + data);
+			
+				toast.error('Erro não atualizar o saldo!', {
+					position: 'top-right',
+					autoClose: 1500,
+					hideProgressBar: true,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined
+				});
+				
 			})
 			.finally(() => {
 				dialog.close();
@@ -67,8 +95,8 @@ export function UpdateBalanceProductDialogModal({ product }: Props) {
 					className="form-control"
 					{...register('transactionType')}
 					placeholder="Selecione...">
-					<option value="1">Adicionar ao saldo</option>
-					<option value="2">Subtrair do saldo</option>
+					<option value="1">Adicionar ao saldo (+)</option>
+					<option value="2">Subtrair do saldo (-)</option>
 				</select>
 			</div>
 
