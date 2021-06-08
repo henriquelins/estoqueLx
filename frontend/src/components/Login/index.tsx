@@ -46,8 +46,9 @@ const Login = () => {
 		}
 	};
 
+
 	return (
-		<form onSubmit={submit} className="form-signin border rounded-3 ">
+		<form onSubmit={submit} id="form" className="form-signin border rounded-2 border-2">
 			<div className="text-center">
 				<Logo2 />
 				<h1 className="h1 font-weight-normal">
@@ -94,7 +95,7 @@ const Login = () => {
 				<label htmlFor="inputPassword">Senha</label>
 			</div>
 			<div className="text-center ">
-				<button className="btn btn-lg btn-primary btn-block border-bottom" type="submit">
+				<button className="btn btn-lg btn btn-secondary btn-lg btn-block border-bottom" type="submit">
 					{
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +111,7 @@ const Login = () => {
 					Acessar
 				</button>
 			</div>
-			<div className="pb-4 mb-2 border-bottom" />
+			<div className="pb-4 mb-2 border-bottom " />
 
 			<div className="text-center mb-2 ">
 				<Link to="/signup">Criar novo usuário</Link>

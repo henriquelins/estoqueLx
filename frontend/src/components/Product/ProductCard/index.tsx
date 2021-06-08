@@ -70,7 +70,7 @@ const ProductCard = ({ product }: Props) => {
 						</svg>
 					}
 				</button>
-
+				
 				<button
 					className="btn btn-danger m-1"
 					data-mdb-toggle="tooltip"

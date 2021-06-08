@@ -48,7 +48,7 @@ const FormAddUser = () => {
 	};
 
 	return (
-		<form onSubmit={submit} className="form-signin border rounded-3">
+		<form onSubmit={submit} className="form-signin border rounded-2 border-2">
 			<div className="mb-3">
 				<div className="text-center mb-4">
 					<h1 className="h2 mb-2 font-weight-normal">
@@ -115,7 +115,7 @@ const FormAddUser = () => {
 				/>
 			</div>
 			<div className="text-center md-auto ">
-				<button type="submit" className=" btn btn-primary md-3">
+				<button type="submit" className=" btn btn-secondary btn-lg md-3">
 					{
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
