@@ -1,6 +1,6 @@
 .product-container {
   padding: 20px 0px 0px 9px;
-  height: calc(100vh - 254px);
+  height: calc(120vh - 254px);
 }
 
 .product-content {
@@ -16,7 +16,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 10px 30px 80px 0px;
+    padding: 10px 50px 80px 0px;
     
   }
   
@@ -60,7 +60,7 @@
   
 .order-card-image {
   padding-left: 20%;
-  border-color: aqua;
+  border-color: rgb(0, 4, 255);
   width:80%;
 }
   
@@ -78,12 +78,12 @@
     font-size: 16px;
     line-height: 22px;
     letter-spacing: -0.015em;
-    color: var(--secondary-color);
+    color: rgb(36, 18, 134);
 }
   
 .order-card-description p {
     font-weight: normal;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 19px;
     letter-spacing: -0.015em;
     color: gray;

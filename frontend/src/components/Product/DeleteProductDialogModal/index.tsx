@@ -1,43 +1,24 @@
-import { useForm } from 'react-hook-form';
 import { useDialog } from 'react-st-modal';
 import { toast } from 'react-toastify';
 import { Product } from 'types/product';
+import { refreshPage } from 'utils/helpers';
 import { deleteProduct } from '../../../services/api';
 
 type Props = {
 	product: Product;
 };
 
-type Inputs = {
-	id: number;
-};
-
-
 export function DeleteProductDialogModal({ product }: Props) {
-	
-	const refreshPage = () => {
-		window.location.reload();
-	};
-	
+
 	const dialog = useDialog();
-	
-	const { handleSubmit } = useForm<Inputs>({
-		defaultValues: {
-			id: Number(product.id)
-		}
-	});
-	
-	
-	
 
+	const idProd: number = product["id"]
 
-	const onSubmit = (data: Inputs) => {
-			
-		JSON.stringify(data);
+	const submit = () => {
 		
-		deleteProduct(data)
-			.then(() => {
-			
+		deleteProduct(idProd)
+			.then( () => {
+				
 				toast.success('Produto excluído com sucesso!', {
 					position: 'top-right',
 					onClose: (props) => refreshPage(),
@@ -51,7 +32,7 @@ export function DeleteProductDialogModal({ product }: Props) {
 				
 			})
 			.catch(() => {
-				
+
 				toast.error('Produto não excluído!', {
 					position: 'top-right',
 					autoClose: 1500,
@@ -66,13 +47,11 @@ export function DeleteProductDialogModal({ product }: Props) {
 			.finally(() => {
 				dialog.close();
 			});
-		
+			
 	};
-	
-	
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className="form-signin  ">
+		<form className="form-signin  ">
 			<div className="mb-3">
 				<label htmlFor="name" className="form-label">
 					Deseja excluir o produto {product.name} ?
@@ -80,7 +59,7 @@ export function DeleteProductDialogModal({ product }: Props) {
 			</div>
 
 			<div className="d-flex p-2 md-2 justify-content-end ">
-				<button type="submit" className="btn btn-success px-2 mx-2">
+				<button type="submit" className="btn btn-success px-2 mx-2" onClick={submit} >
 					{
 						<svg
 							xmlns="http://www.w3.org/2000/svg"

@@ -38,26 +38,82 @@ public class ProductController {
 		return ResponseEntity.ok().body(list);
 	}
 
-	
-	
-	@DeleteMapping("/products/delete/{id}")
-	public ResponseEntity<Boolean> delete (@PathVariable (value = "id")  Long id){
-		
-		Boolean response = false;
-		
+	/*
+	 * @DeleteMapping("/products/{id}") public void delete (@PathVariable Long id){
+	 * service.delete(id); }
+	 */
+
+	/*@DeleteMapping("/products/{id}")
+	public String delete(@PathVariable(value = "id") Long prodId) {
+		String response = "";
 		try {
-			service.delete(id);
-			response = true;
-		} catch (Exception e) {
+			ProductDTO dto = service.findOne(prodId);
+			service.delete(dto.getId());
+			response = "Produto deletado";
+
+		} catch (java.util.NoSuchElementException e) {
+			response = "Erro";
 			e.getLocalizedMessage();
 		}
-				
+		return response;
+	}*/
+	
+	/*@DeleteMapping("/products/delete/{id}")
+	public ResponseEntity<String>  delete(@PathVariable(value = "id") Long prodId) {
+		
+		String response = "";
+		URI uri = null;
+		
+		try {
+			
+			ProductDTO dto = service.findOne(prodId);
+			service.delete(dto.getId());
+			response = "Produto deletado";
+			uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+			
+		} catch (java.util.NoSuchElementException e) {
+			response = "Erro";
+			e.getLocalizedMessage();
+		}
+	
+		
 		return ResponseEntity.ok().body(response);
 		
+	}*/
+
+	/*@DeleteMapping("/products/delete/{id}") 
+		public void delete(@PathVariable(value = "id") Long prodId) {	
+	
+			ProductDTO dto = service.findOne(prodId);
+			service.delete(dto.getId());
+			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+			
+	
+		
+	}*/
+	
+	@DeleteMapping("/products/delete/{id}")
+	public void delete (@PathVariable (value="id")Long id){
+		service.delete(id);
 	}
 
 	
 
+	/*@PutMapping("/products/edit")
+	public ResponseEntity<ProductDTO> put (@RequestBody ProductDTO dto){
+		dto = service.update(dto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+		return ResponseEntity.created(uri).body(dto);
+		
+	}*/
+	
+	
+	/*@PutMapping("/products/edit/{id}")
+	public ResponseEntity<ProductDTO> put (@PathVariable (value="id") Long id, ProductDTO dto){
+		dto = service.update(dto);
+		return ResponseEntity.ok().body(dto);
+	}*/
+	
 	@PutMapping("/products/edit")
 	public ResponseEntity<ProductDTO> put (@RequestBody ProductDTO dto){
 		dto = service.update(dto);
@@ -76,7 +132,6 @@ public class ProductController {
 				.buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(dto);
 	}
-	
 
 	@GetMapping(path = { "/products/findByNameList/{name}" })
 	public ResponseEntity<List<ProductDTO>> findByNameList(@PathVariable String name) {

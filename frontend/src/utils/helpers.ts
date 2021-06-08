@@ -8,3 +8,7 @@ export function formatPrice(price: number){
 
     return formatter.format(price);
 }
+
+export function refreshPage() {
+    window.location.reload();
+};

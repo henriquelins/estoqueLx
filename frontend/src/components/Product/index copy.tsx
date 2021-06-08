@@ -6,8 +6,9 @@ import { Product } from "types/product";
 import "./styles.css";
 
 const Products = () => {
-    
-const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
+
+  //var search = "";
   
 useEffect(() => {
 
@@ -20,6 +21,27 @@ useEffect(() => {
       });
   }, []);
   
+
+  /*useEffect( () => {
+
+    if (search==="" || search==="undefined"){
+    fetchProducts()
+    .then((response: { data: React.SetStateAction<Product[]>; }) => setProducts(response.data))
+    .catch(() => {
+        console.log('Erro ao listar produtos');
+      })
+    } else {
+      seachProducts(search)
+			.then((response: { data: React.SetStateAction<Product[]>; }
+				) => setProducts(response.data))
+			.catch ( () => {
+				console.log('Erro na pesquisa!')
+			})
+
+    }
+
+    
+}, [search]);*/
 
   return (
     <>

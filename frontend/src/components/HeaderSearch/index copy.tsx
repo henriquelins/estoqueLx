@@ -1,14 +1,68 @@
 import { AddProductDialogModal } from "components/Product/AddProductDialogModal";
+import React, { useState } from "react";
 import { CustomDialog } from "react-st-modal";
 import { ReactComponent as Logo } from "../../assets/images/logo.svg";
 
+type SearchData = {
+  prod: string;
+};
+
+
  const HeaderSearch = () => {
+
+  const [searchData, setSearchData] = useState<SearchData>();
+
+  const handleSearch = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+	
+	const search = searchData?.prod;
+
+	 return search
+  };
+
+  
+
 
   return (
     <div>
       <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <ul className="navbar-nav me-auto mb-2 mb-md-0">
           <Logo />
+        </ul>
+
+        <ul className="navbar-nav me-auto mb-2 mb-md-0">
+          <form className="d-flex">
+            <input
+              className="form-control me-2"
+              type="pesquisar"
+              placeholder="Pesquisar..."
+              aria-label="Pesquisar"
+              onChange={(e) =>
+                setSearchData({ ...searchData, prod: e.target.value })
+              }
+            />
+            <button
+              data-mdb-toggle="tooltip"
+              data-mdb-placement="bottom"
+              title="Pesquisar"
+              className="btn btn-primary "
+              type="submit"
+              onClick={handleSearch}
+            >
+              {
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-search"
+                  viewBox="0 0 15 15"
+                >
+                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                </svg>
+              }
+            </button>
+          </form>
         </ul>
 
         <ul className="navbar-nav me-4 mb-2 mb-md-0">

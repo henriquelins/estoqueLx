@@ -1,11 +1,12 @@
-import { useState } from 'react';
 import '../Login/styles.css';
 import api from 'services/api';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { login, logout } from 'services/auth';
 import { toast } from 'react-toastify';
 import { ReactComponent as Logo2 } from '../../assets/images/logo2.svg';
+import { refreshPage } from 'utils/helpers';
 
 type loginData = {
 	email: string;
@@ -28,8 +29,8 @@ const Login = () => {
 		if (!response.data.token) {
 
 			toast.error('Usuário não autenticado!', {
-				onOpen:  (props) => logout(),
-				onClose: (props) => window.location.reload(),
+				onOpen:  () => logout(),
+				onClose: () => refreshPage(),
 				position: 'top-right',
 				autoClose: 2000,
 				hideProgressBar: true,

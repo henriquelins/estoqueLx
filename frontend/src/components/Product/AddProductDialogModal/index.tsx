@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useDialog } from 'react-st-modal';
 import { toast } from 'react-toastify';
+import { refreshPage } from 'utils/helpers';
 import { addProduct } from '../../../services/api';
 
 type Inputs = {
@@ -15,10 +16,6 @@ export function AddProductDialogModal() {
 	const dialog = useDialog();
 
 	const { register, handleSubmit } = useForm<Inputs>();
-
-	const refreshPage = () => {
-		window.location.reload();
-	};
 
 	const onSubmit = (data: Inputs) => {
 		JSON.stringify(data);
